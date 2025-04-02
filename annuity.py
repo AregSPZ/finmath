@@ -16,15 +16,15 @@ class Annuity:
         return (1-nyu(self.i)**self.n)/self.i
     
     def s_post(self):
-         '''Future Value of the annuity (postnumerando)'''
+        '''Future Value of the annuity (postnumerando)'''
         return self.a_post() * (1+self.i)**self.n
 
     def a_pre(self):
-         '''Present Value of the annuity (prenumerando)'''
+        '''Present Value of the annuity (prenumerando)'''
         return self.a_post() * (1+self.i)
     
     def s_pre(self):
-         '''Future Value of the annuity (prenumerando)'''
+        '''Future Value of the annuity (prenumerando)'''
         return self.a_pre() * (1+self.i)**self.n
 
     def Ia_unit_post(self):
