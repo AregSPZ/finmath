@@ -8,10 +8,6 @@ class Annuity:
     
     def __init__(self, i, n):
         # every annuity has an interest rate and a number of intervals
-        if i <= 0:
-            raise ValueError("Expected positive interest rate")
-        if n <= 0 or int(n) != n:
-            raise ValueError("Expected positive int as number of intervals")
         self.i = i
         self.n = n
 
