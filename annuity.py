@@ -1,52 +1,66 @@
 def nyu(i):
+    '''Discount function'''
     return 1 / (1+i)
 
 class Annuity:
 
     '''An annuity is a financial product or arrangement where a series of payments are made at regular intervals over a specified period of time.'''
-
+    
     def __init__(self, i, n):
+        # every annuity has an interest rate and a number of intervals
         self.i = i
         self.n = n
 
     def a_post(self):
+        '''Present Value of the annuity (postnumerando)'''
         return (1-nyu(self.i)**self.n)/self.i
     
     def s_post(self):
+         '''Future Value of the annuity (postnumerando)'''
         return self.a_post() * (1+self.i)**self.n
 
     def a_pre(self):
+         '''Present Value of the annuity (prenumerando)'''
         return self.a_post() * (1+self.i)
     
     def s_pre(self):
+         '''Future Value of the annuity (prenumerando)'''
         return self.a_pre() * (1+self.i)**self.n
 
     def Ia_unit_post(self):
+        '''Present Value of a unit annuity with arithmetically increasing regular payments (postnumerando)'''
         return (self.a_pre() - self.n*nyu(self.i)**self.n)/self.i
     
     def Ia_post(self, a, b):
+        '''Present Value of an annuity with arithmetically increasing regular payments (postnumerando)'''
         if self.n == 1:
             return a*nyu(self.i)
         return a*self.a_post() + b*Annuity(self.i, self.n - 1).Ia_unit_post()*nyu(self.i)
     
     def Is_unit_post(self):
+        '''Future Value of a unit annuity with arithmetically increasing regular payments (postnumerando)'''
         return (self.s_pre() - self.n)/self.i
     
     def Is_post(self, a, b):
+        '''Future Value of an annuity with arithmetically increasing regular payments (postnumerando)'''
         return self.Ia_post(a, b) * (1+self.i)**self.n 
 
     def Ia_unit_pre(self):
+        '''Present Value of a unit annuity with arithmetically increasing regular payments (prenumerando)'''
         return self.Ia_unit_post() * (1+self.i)
 
     def Ia_pre(self, a, b):
+        '''Present Value of an annuity with arithmetically increasing regular payments (prenumerando)'''
         if self.n == 1:
             return a
         return a*self.a_pre() + b*Annuity(self.i, self.n - 1).Ia_unit_pre()*nyu(self.i)
     
     def Is_unit_pre(self):
+        '''Future Value of a unit annuity with arithmetically increasing regular payments (prenumerando)'''
         return self.Is_unit_post() * (1+self.i)
         
     def Is_pre(self, a, b):
+        '''Future Value of an annuity with arithmetically increasing regular payments (prenumerando)'''
         return self.Ia_pre(self, a, b) * (1+self.i)**self.n 
     
     
