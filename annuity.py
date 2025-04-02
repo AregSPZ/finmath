@@ -1,7 +1,5 @@
 def nyu(i):
     '''Discount function'''
-    if i <= 0:
-        raise ValueError("Expected positive interest rate")
     return 1 / (1+i)
 
 class Annuity:
